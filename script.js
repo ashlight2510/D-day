@@ -539,32 +539,94 @@ function shareToInstagram(dateString, days, startDateString = null, title = 'D-d
 
 // 이미지 복사
 function copyShareImage(dateString, days, startDateString = null, title = 'D-day') {
-    // 현재 화면의 실제 값 가져오기
-    let actualDays = days;
-    if (!startDateString) {
-        const countElement = document.getElementById('countNumber');
-        if (countElement) {
-            actualDays = parseInt(countElement.textContent) || days;
+    try {
+        // 현재 화면의 실제 값 가져오기
+        let actualDays = days;
+        if (!startDateString) {
+            const countElement = document.getElementById('countNumber');
+            if (countElement) {
+                actualDays = parseInt(countElement.textContent) || days;
+            }
         }
+        
+        const shareImage = generateShareImage(dateString, actualDays, startDateString, title);
+        if (!shareImage) {
+            alert('이미지 생성에 실패했습니다. 다시 시도해주세요.');
+            return;
+        }
+        
+        // Clipboard API 지원 확인
+        if (navigator.clipboard && navigator.clipboard.write) {
+            shareImage.toBlob(blob => {
+                if (!blob) {
+                    downloadImage(shareImage, `dday-${dateString}-${Date.now()}.png`);
+                    alert('이미지를 다운로드했습니다.');
+                    return;
+                }
+                
+                navigator.clipboard.write([
+                    new ClipboardItem({ 'image/png': blob })
+                ]).then(() => {
+                    alert('이미지가 클립보드에 복사되었습니다!');
+                }).catch(err => {
+                    console.error('클립보드 복사 오류:', err);
+                    // 실패 시 다운로드로 대체
+                    downloadImage(shareImage, `dday-${dateString}-${Date.now()}.png`);
+                    alert('클립보드 복사에 실패했습니다. 이미지를 다운로드했습니다.');
+                });
+            }, 'image/png');
+        } else {
+            // Clipboard API를 지원하지 않는 경우 다운로드
+            downloadImage(shareImage, `dday-${dateString}-${Date.now()}.png`);
+            alert('이 브라우저는 클립보드 복사를 지원하지 않습니다. 이미지를 다운로드했습니다.');
+        }
+    } catch (error) {
+        console.error('이미지 복사 오류:', error);
+        alert('이미지 복사 중 오류가 발생했습니다. 다시 시도해주세요.');
     }
-    
-    const shareImage = generateShareImage(dateString, actualDays, startDateString, title);
-    shareImage.toBlob(blob => {
-        navigator.clipboard.write([
-            new ClipboardItem({ 'image/png': blob })
-        ]).then(() => {
-            alert('이미지가 클립보드에 복사되었습니다!');
-        }).catch(() => {
-            downloadImage(shareImage, `dday-${dateString}.png`);
-            alert('이미지를 다운로드했습니다.');
-        });
-    });
 }
 
 // 공유 이미지 생성
 function generateShareImage(dateString, days, startDateString = null, title = 'D-day', memoText = null) {
     const canvas = document.getElementById('shareCanvas');
+    if (!canvas) {
+        console.error('shareCanvas를 찾을 수 없습니다.');
+        return null;
+    }
+    
     const ctx = canvas.getContext('2d');
+    if (!ctx) {
+        console.error('Canvas context를 가져올 수 없습니다.');
+        return null;
+    }
+    
+    // 카운트다운 중지 (저장 시 정지된 상태)
+    if (countdownInterval) {
+        clearInterval(countdownInterval);
+        countdownInterval = null;
+    }
+    
+    // 현재 화면의 실제 값 가져오기 (애니메이션 중이 아닌 정지된 값)
+    let actualDays = days;
+    let actualTime = { days: 0, hours: 0, minutes: 0, seconds: 0 };
+    
+    if (!memoText && !startDateString) {
+        // D-day 계산인 경우
+        const daysElement = document.getElementById('daysValue');
+        const hoursElement = document.getElementById('hoursValue');
+        const minutesElement = document.getElementById('minutesValue');
+        const secondsElement = document.getElementById('secondsValue');
+        
+        if (daysElement) actualTime.days = parseInt(daysElement.textContent) || 0;
+        if (hoursElement) actualTime.hours = parseInt(hoursElement.textContent) || 0;
+        if (minutesElement) actualTime.minutes = parseInt(minutesElement.textContent) || 0;
+        if (secondsElement) actualTime.seconds = parseInt(secondsElement.textContent) || 0;
+        
+        const countElement = document.getElementById('countNumber');
+        if (countElement) {
+            actualDays = parseInt(countElement.textContent) || days;
+        }
+    }
     
     canvas.width = 1200;
     canvas.height = 630;
@@ -581,21 +643,35 @@ function generateShareImage(dateString, days, startDateString = null, title = 'D
     ctx.textAlign = 'center';
     
     if (memoText) {
-        // 메모 공유 이미지
-        ctx.font = 'bold 56px Arial';
-        ctx.fillText('📝 D-day 메모', canvas.width / 2, 120);
+        // 메모 공유 이미지 - 감성적인 디자인
+        // 날짜와 메모 텍스트 분리
+        const memoLines = memoText.split('\n');
+        let dateString = '';
+        let memoContent = '';
         
-        ctx.font = '40px Arial';
-        const lines = wrapText(ctx, memoText, canvas.width - 200);
-        let y = 280;
+        // 첫 번째 줄이 날짜 형식인지 확인 (예: "2024년 12월 19일 (목)")
+        if (memoLines.length > 0 && memoLines[0].includes('년') && memoLines[0].includes('월')) {
+            dateString = memoLines[0];
+            memoContent = memoLines.slice(1).join('\n').trim();
+        } else {
+            // 날짜가 없으면 메모 전체를 내용으로
+            memoContent = memoText;
+        }
+        
+        // 날짜 표시 (있을 경우)
+        if (dateString) {
+            ctx.font = '48px Arial';
+            ctx.fillText(dateString, canvas.width / 2, 200);
+        }
+        
+        // 메모 내용 표시 (날짜 아래)
+        ctx.font = '44px Arial';
+        const lines = wrapText(ctx, memoContent || memoText, canvas.width - 200);
+        let y = dateString ? 320 : 280;
         lines.forEach(line => {
             ctx.fillText(line, canvas.width / 2, y);
-            y += 60;
+            y += 70;
         });
-        
-        ctx.font = '28px Arial';
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
-        ctx.fillText('D-day 계산기', canvas.width / 2, canvas.height - 50);
     } else if (startDateString) {
         // N일 후 계산 이미지
         ctx.font = 'bold 64px Arial';
@@ -612,33 +688,14 @@ function generateShareImage(dateString, days, startDateString = null, title = 'D
         const futureDate = new Date(dateString + 'T00:00:00');
         ctx.fillText(formatDateKorean(futureDate), canvas.width / 2, 450);
     } else {
-        // D-day 계산 이미지 (저장 시 정지된 값 사용)
-        ctx.font = 'bold 80px Arial';
-        ctx.fillText('D-' + actualDays, canvas.width / 2, 180);
+        // D-day 계산 이미지 (저장 시 정지된 값 사용) - 감성적인 디자인
+        ctx.font = 'bold 120px Arial';
+        ctx.fillText('D-' + actualDays, canvas.width / 2, 280);
         
         ctx.font = '48px Arial';
         const targetDate = new Date(dateString + 'T00:00:00');
-        ctx.fillText(formatDateKorean(targetDate), canvas.width / 2, 280);
-        
-        // 상세 시간 표시
-        if (actualTime.days > 0 || actualTime.hours > 0 || actualTime.minutes > 0 || actualTime.seconds > 0) {
-            ctx.font = '36px Arial';
-            let timeText = '';
-            if (actualTime.days > 0) timeText += `${actualTime.days}일 `;
-            if (actualTime.hours > 0) timeText += `${actualTime.hours}시간 `;
-            if (actualTime.minutes > 0) timeText += `${actualTime.minutes}분 `;
-            if (actualTime.seconds > 0) timeText += `${actualTime.seconds}초`;
-            ctx.fillText(timeText.trim(), canvas.width / 2, 360);
-        }
-        
-        ctx.font = '32px Arial';
-        ctx.fillText('목표일까지 남은 시간', canvas.width / 2, 420);
+        ctx.fillText(formatDateKorean(targetDate), canvas.width / 2, 380);
     }
-    
-    // 하단 워터마크
-    ctx.font = '24px Arial';
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
-    ctx.fillText('D-day 계산기', canvas.width / 2, canvas.height - 30);
     
     return canvas;
 }
@@ -665,10 +722,30 @@ function wrapText(ctx, text, maxWidth) {
 
 // 이미지 다운로드
 function downloadImage(canvas, filename) {
-    const link = document.createElement('a');
-    link.download = filename;
-    link.href = canvas.toDataURL();
-    link.click();
+    try {
+        if (!canvas) {
+            console.error('Canvas가 없습니다.');
+            return;
+        }
+        
+        const dataURL = canvas.toDataURL('image/png');
+        if (!dataURL || dataURL === 'data:,') {
+            console.error('이미지 데이터를 생성할 수 없습니다.');
+            alert('이미지 생성에 실패했습니다.');
+            return;
+        }
+        
+        const link = document.createElement('a');
+        link.download = filename;
+        link.href = dataURL;
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    } catch (error) {
+        console.error('이미지 다운로드 오류:', error);
+        alert('이미지 다운로드 중 오류가 발생했습니다.');
+    }
 }
 
 // 메모 카카오톡 공유
