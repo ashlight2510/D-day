@@ -402,17 +402,46 @@ section h2 {
 }
 
 .memo-actions-inline {
-    display: flex;
-    gap: 5px;
-    flex-wrap: wrap;
-    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-top: 12px;
 }
 
 .memo-actions-inline .btn {
-    flex: 1;
-    min-width: 80px;
-    padding: 5px 10px;
-    font-size: 0.85em;
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 0.9em;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.memo-actions-inline .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.memo-actions-inline .btn-danger {
+    background: var(--danger-color);
+}
+
+.memo-actions-inline .btn-danger:hover {
+    background: #c0392b;
+}
+
+.memo-actions-inline .share-btn {
+    background: #6c757d;
+}
+
+.memo-actions-inline .share-btn:hover {
+    background: #5a6268;
 }
 
 .widget-section {
@@ -545,6 +574,16 @@ footer p {
     
     .time-value {
         font-size: 1.5em;
+    }
+    
+    .memo-actions-inline {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    
+    .memo-actions-inline .btn {
+        height: 44px;
+        font-size: 0.95em;
     }
 }
 

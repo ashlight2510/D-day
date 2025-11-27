@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>D-day 위젯</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+          "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+          "Helvetica Neue", sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 150px;
+        padding: 10px;
+      }
+
+      .widget-container {
+        text-align: center;
+        width: 100%;
+      }
+
+      .widget-title {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        opacity: 0.9;
+      }
+
+      .widget-date {
+        font-size: 14px;
+        margin-bottom: 15px;
+        opacity: 0.8;
+      }
+
+      .widget-dday {
+        font-size: 36px;
+        font-weight: bold;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .widget-dday.positive {
+        color: #50c878;
+      }
+
+      .widget-dday.negative {
+        color: #e74c3c;
+      }
+
+      .widget-dday.today {
+        color: #ffd700;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="widget-container">
+      <div class="widget-title" id="widgetTitle">D-day</div>
+      <div class="widget-date" id="widgetDate"></div>
+      <div class="widget-dday" id="widgetDday">계산 중...</div>
+    </div>
+
+    <script>
+      // URL 파라미터에서 날짜와 제목 가져오기
+      function getUrlParameter(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        const regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+        const results = regex.exec(location.search);
+        return results === null
+          ? ""
+          : decodeURIComponent(results[1].replace(/\+/g, " "));
+      }
+
+      // 날짜를 한국어 형식으로 포맷팅
+      function formatDateKorean(date) {
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+        const weekdays = ["일", "월", "화", "수", "목", "금", "토"];
+        const weekday = weekdays[date.getDay()];
+        return `${year}년 ${month}월 ${day}일 (${weekday})`;
+      }
+
+      // D-day 계산 및 표시
+      function calculateAndDisplay() {
+        const dateParam = getUrlParameter("date");
+        const titleParam = getUrlParameter("title") || "D-day";
+
+        if (!dateParam) {
+          document.getElementById("widgetDday").textContent =
+            "날짜를 입력해주세요";
+          return;
+        }
+
+        const targetDate = new Date(dateParam + "T00:00:00");
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        const diffTime = targetDate - today;
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+        // 제목 표시
+        document.getElementById("widgetTitle").textContent = titleParam;
+
+        // 날짜 표시
+        document.getElementById("widgetDate").textContent =
+          formatDateKorean(targetDate);
+
+        // D-day 표시
+        const ddayElement = document.getElementById("widgetDday");
+        if (diffDays === 0) {
+          ddayElement.textContent = "D-day";
+          ddayElement.className = "widget-dday today";
+        } else if (diffDays > 0) {
+          ddayElement.textContent = `D-${diffDays}`;
+          ddayElement.className = "widget-dday positive";
+        } else {
+          const pastDays = Math.abs(diffDays);
+          ddayElement.textContent = `D+${pastDays}`;
+          ddayElement.className = "widget-dday negative";
+        }
+      }
+
+      // 페이지 로드 시 계산
+      calculateAndDisplay();
+
+      // 매일 자정에 자동 업데이트 (선택사항)
+      setInterval(() => {
+        const now = new Date();
+        if (now.getHours() === 0 && now.getMinutes() === 0) {
+          calculateAndDisplay();
+        }
+      }, 60000); // 1분마다 체크
+    </script>
+  </body>
+</html>

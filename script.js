@@ -436,7 +436,7 @@ function generateWidget() {
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     
     const widgetCode = `
-<iframe src="${window.location.origin}/widget.html?date=${widgetDate}&title=${encodeURIComponent(widgetTitle)}" 
+<iframe src="https://ashlight.store/widget.html?date=${widgetDate}&title=${encodeURIComponent(widgetTitle)}" 
         width="300" 
         height="150" 
         frameborder="0" 
