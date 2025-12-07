@@ -3,7 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>D-day 위젯</title>
+    <title>D-day 위젯 | 블로그용 D-day 카운트다운 위젯</title>
+    <meta
+      name="description"
+      content="블로그나 웹사이트에 삽입할 수 있는 D-day 위젯입니다. 목표일까지 며칠 남았는지 실시간으로 표시하는 무료 위젯을 제공합니다."
+    />
+    <link rel="canonical" href="https://ashlight.store/widget.html" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <style>
       * {
         margin: 0;
@@ -17,16 +23,18 @@
           "Helvetica Neue", sans-serif;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 150px;
-        padding: 10px;
+        min-height: 100vh;
+        padding: 20px;
       }
 
       .widget-container {
         text-align: center;
         width: 100%;
+        min-height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
       }
 
       .widget-title {
@@ -60,13 +68,243 @@
       .widget-dday.today {
         color: #ffd700;
       }
+
+      /* 위젯 설명 페이지 스타일 (파라미터 없을 때) */
+      .widget-info-page {
+        max-width: 900px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.95);
+        color: #333;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        display: none;
+      }
+
+      .widget-info-page.show {
+        display: block;
+      }
+
+      .widget-info-page h1 {
+        color: #667eea;
+        margin-bottom: 20px;
+        font-size: 2em;
+      }
+
+      .widget-info-page h2 {
+        color: #667eea;
+        margin-top: 30px;
+        margin-bottom: 15px;
+        font-size: 1.5em;
+      }
+
+      .widget-info-page p {
+        margin-bottom: 15px;
+        line-height: 1.8;
+      }
+
+      .widget-info-page ul, .widget-info-page ol {
+        margin: 15px 0;
+        padding-left: 30px;
+      }
+
+      .widget-info-page li {
+        margin-bottom: 10px;
+      }
+
+      .widget-info-page code {
+        background: #f5f5f5;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-family: monospace;
+      }
+
+      .widget-info-page pre {
+        background: #f5f5f5;
+        padding: 15px;
+        border-radius: 5px;
+        overflow-x: auto;
+        margin: 15px 0;
+      }
+
+      .back-link {
+        display: inline-block;
+        margin-bottom: 20px;
+        color: #667eea;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .back-link:hover {
+        text-decoration: underline;
+      }
+
+      .example-box {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        padding: 20px;
+        border-radius: 10px;
+        margin: 20px 0;
+        border-left: 4px solid #667eea;
+      }
     </style>
   </head>
   <body>
-    <div class="widget-container">
+    <!-- 위젯 표시 영역 (파라미터 있을 때) -->
+    <div class="widget-container" id="widgetDisplay">
       <div class="widget-title" id="widgetTitle">D-day</div>
       <div class="widget-date" id="widgetDate"></div>
       <div class="widget-dday" id="widgetDday">계산 중...</div>
+    </div>
+
+    <!-- 위젯 설명 페이지 (파라미터 없을 때) -->
+    <div class="widget-info-page" id="widgetInfoPage">
+      <a href="index.html" class="back-link">← 메인으로 돌아가기</a>
+      
+      <h1>D-day 위젯 사용 가이드</h1>
+      
+      <p>
+        D-day 위젯은 블로그, 카페, 웹사이트에 삽입하여 목표일까지 며칠 남았는지 
+        실시간으로 표시할 수 있는 무료 위젯입니다. 시험일, 생일, 기념일 등 
+        중요한 날짜를 시각적으로 표현하여 방문자들에게 동기부여를 제공합니다.
+      </p>
+
+      <h2>위젯이란?</h2>
+      <p>
+        D-day 위젯은 작은 HTML 코드 조각으로, 다른 웹사이트에 삽입하면 
+        해당 페이지에 D-day 카운트다운이 표시됩니다. 위젯은 매일 자동으로 
+        업데이트되어 정확한 남은 일수를 보여줍니다.
+      </p>
+
+      <h2>위젯 사용 방법</h2>
+      
+      <h3>1단계: 위젯 코드 생성</h3>
+      <p>
+        <a href="index.html">메인 페이지</a>의 "블로그용 위젯 코드 생성" 섹션에서 
+        다음 정보를 입력하세요:
+      </p>
+      <ul>
+        <li><strong>위젯에 표시할 날짜:</strong> 목표일을 선택합니다</li>
+        <li><strong>위젯 제목:</strong> 위젯 상단에 표시될 제목을 입력합니다 (예: "시험일까지", "생일까지")</li>
+      </ul>
+      <p>입력 후 "위젯 코드 생성" 버튼을 클릭하면 HTML 코드가 생성됩니다.</p>
+
+      <h3>2단계: 위젯 코드 복사</h3>
+      <p>
+        생성된 HTML 코드를 복사합니다. 코드는 다음과 같은 형태입니다:
+      </p>
+      <pre><code>&lt;iframe src="https://ashlight.store/widget.html?date=2025-12-25&title=시험일까지" 
+        width="300" 
+        height="150" 
+        frameborder="0" 
+        scrolling="no"&gt;
+&lt;/iframe&gt;</code></pre>
+
+      <h3>3단계: 블로그/웹사이트에 삽입</h3>
+      <p>복사한 코드를 원하는 위치에 붙여넣습니다:</p>
+      <ul>
+        <li><strong>네이버 블로그:</strong> HTML 편집 모드에서 원하는 위치에 삽입</li>
+        <li><strong>티스토리:</strong> HTML/CSS 편집에서 사이드바나 본문에 삽입</li>
+        <li><strong>워드프레스:</strong> HTML 블록이나 위젯 영역에 삽입</li>
+        <li><strong>카페/커뮤니티:</strong> HTML 편집이 가능한 게시판에 삽입</li>
+        <li><strong>자체 웹사이트:</strong> HTML 소스 코드의 원하는 위치에 삽입</li>
+      </ul>
+
+      <h2>위젯 파라미터 설명</h2>
+      <p>위젯 URL에는 다음 파라미터를 사용할 수 있습니다:</p>
+      <ul>
+        <li><strong>date (필수):</strong> 목표일 (형식: YYYY-MM-DD, 예: 2025-12-25)</li>
+        <li><strong>title (선택):</strong> 위젯 제목 (기본값: "D-day")</li>
+      </ul>
+      <p>예시 URL:</p>
+      <pre><code>https://ashlight.store/widget.html?date=2025-12-25&title=시험일까지</code></pre>
+
+      <h2>위젯 크기 조정</h2>
+      <p>
+        위젯의 크기는 iframe의 width와 height 속성으로 조정할 수 있습니다:
+      </p>
+      <ul>
+        <li><strong>작은 위젯:</strong> width="250" height="120"</li>
+        <li><strong>중간 위젯:</strong> width="300" height="150" (기본값)</li>
+        <li><strong>큰 위젯:</strong> width="400" height="200"</li>
+      </ul>
+      <p>
+        반응형 디자인을 원하시면 width="100%"를 사용하되, 
+        컨테이너의 최대 너비를 CSS로 제한하는 것을 권장합니다.
+      </p>
+
+      <h2>위젯 활용 사례</h2>
+      
+      <div class="example-box">
+        <h3>📚 학생 블로그</h3>
+        <p>
+          수능일, 시험일까지의 D-day를 블로그에 표시하여 동기부여를 받고, 
+          방문자들에게도 목표를 공유할 수 있습니다.
+        </p>
+      </div>
+
+      <div class="example-box">
+        <h3>🎂 개인 블로그</h3>
+        <p>
+          생일, 기념일, 여행일까지의 카운트다운을 표시하여 
+          특별한 날을 기다리는 설렘을 표현할 수 있습니다.
+        </p>
+      </div>
+
+      <div class="example-box">
+        <h3>💼 비즈니스 웹사이트</h3>
+        <p>
+          프로젝트 마감일, 이벤트 개최일, 제품 출시일 등을 표시하여 
+          고객들에게 중요한 일정을 알릴 수 있습니다.
+        </p>
+      </div>
+
+      <div class="example-box">
+        <h3>🏃 운동/다이어트 블로그</h3>
+        <p>
+          목표 달성일, 대회일까지의 D-day를 표시하여 
+          지속적인 동기부여를 받을 수 있습니다.
+        </p>
+      </div>
+
+      <h2>위젯 특징</h2>
+      <ul>
+        <li><strong>자동 업데이트:</strong> 매일 자동으로 남은 일수가 업데이트됩니다</li>
+        <li><strong>반응형 디자인:</strong> 다양한 화면 크기에 자동으로 적응합니다</li>
+        <li><strong>아름다운 디자인:</strong> 그라데이션 배경과 깔끔한 레이아웃</li>
+        <li><strong>커스터마이징:</strong> 제목과 날짜를 자유롭게 설정 가능</li>
+        <li><strong>완전 무료:</strong> 회원가입이나 결제 없이 무료로 사용 가능</li>
+      </ul>
+
+      <h2>주의사항</h2>
+      <ul>
+        <li>위젯은 iframe을 사용하므로, 일부 웹사이트에서는 보안 정책에 의해 차단될 수 있습니다</li>
+        <li>위젯의 날짜는 서버 시간(한국 시간)을 기준으로 계산됩니다</li>
+        <li>과거 날짜를 입력하면 "D+숫자" 형식으로 표시됩니다</li>
+        <li>위젯은 HTTPS 환경에서 가장 잘 작동합니다</li>
+      </ul>
+
+      <h2>문제 해결</h2>
+      <p>위젯이 표시되지 않는 경우:</p>
+      <ul>
+        <li>HTML 코드가 올바르게 복사되었는지 확인하세요</li>
+        <li>날짜 형식이 YYYY-MM-DD인지 확인하세요</li>
+        <li>웹사이트가 iframe 사용을 허용하는지 확인하세요</li>
+        <li>브라우저 콘솔에서 오류 메시지를 확인하세요</li>
+      </ul>
+
+      <h2>위젯 생성하기</h2>
+      <p>
+        지금 바로 위젯을 생성하고 사용해 보세요:
+      </p>
+      <p style="text-align: center; margin-top: 30px;">
+        <a href="index.html" style="display: inline-block; background: #667eea; color: white; padding: 15px 30px; text-decoration: none; border-radius: 8px; font-weight: 600;">위젯 코드 생성하기</a>
+      </p>
+
+      <div style="margin-top: 50px; padding-top: 30px; border-top: 2px solid #ddd;">
+        <p style="text-align: center; color: #666;">
+          © 2025 AshLight. All rights reserved.
+        </p>
+      </div>
     </div>
 
     <script>
@@ -95,9 +333,10 @@
         const dateParam = getUrlParameter("date");
         const titleParam = getUrlParameter("title") || "D-day";
 
+        // 파라미터가 없으면 설명 페이지 표시
         if (!dateParam) {
-          document.getElementById("widgetDday").textContent =
-            "날짜를 입력해주세요";
+          document.getElementById("widgetDisplay").style.display = "none";
+          document.getElementById("widgetInfoPage").classList.add("show");
           return;
         }
 

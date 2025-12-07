@@ -133,6 +133,17 @@
   <body>
     <div class="container">
       <header>
+        <nav class="main-nav" style="background: rgba(0,0,0,0.1); padding: 15px 20px; margin: -30px -20px 20px -20px; border-bottom: 1px solid rgba(255,255,255,0.2);">
+          <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; align-items: center;">
+            <a href="index.html" style="color: white; text-decoration: none; font-weight: 600; padding: 8px 15px; border-radius: 5px; transition: background 0.3s;">홈</a>
+            <a href="index.html#tools" style="color: white; text-decoration: none; font-weight: 600; padding: 8px 15px; border-radius: 5px; transition: background 0.3s;">도구</a>
+            <div style="position: relative;">
+              <a href="blog.html" style="color: white; text-decoration: none; font-weight: 600; padding: 8px 15px; border-radius: 5px; transition: background 0.3s;">콘텐츠</a>
+            </div>
+            <a href="about.html" style="color: white; text-decoration: none; font-weight: 600; padding: 8px 15px; border-radius: 5px; transition: background 0.3s;">소개</a>
+            <a href="contact.html" style="color: white; text-decoration: none; font-weight: 600; padding: 8px 15px; border-radius: 5px; transition: background 0.3s;">문의</a>
+          </div>
+        </nav>
         <h1>📅 D-day 계산기</h1>
         <p class="subtitle">목표일까지 며칠 남았는지 쉽고 빠르게 계산하세요</p>
         <div class="theme-selector">
@@ -155,6 +166,38 @@
         <div class="daily-quote" id="dailyQuote"></div>
       </header>
 
+      <!-- 사이트 소개 섹션 -->
+      <section class="intro-section" style="background: var(--card-bg); padding: 40px 30px; margin: 0;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+          <h2 style="color: var(--primary-color); font-size: 2em; margin-bottom: 20px; text-align: center;">
+            D-day 계산기로 목표일을 관리하세요
+          </h2>
+          <p style="font-size: 1.1em; line-height: 1.8; color: var(--text-color); margin-bottom: 20px; text-align: center;">
+            생일, 기념일, 시험일, 프로젝트 마감일 등 모든 중요한 날짜를 쉽고 빠르게 계산하고 관리할 수 있는 무료 웹 도구입니다. 
+            복잡한 설치나 회원가입 없이 바로 사용할 수 있으며, 모든 기능을 완전 무료로 제공합니다.
+          </p>
+          <p style="font-size: 1em; line-height: 1.8; color: var(--text-color); margin-bottom: 20px;">
+            D-day 계산기는 단순히 날짜를 계산하는 것을 넘어, 목표를 향한 여정을 함께합니다. 
+            실시간 카운트다운, 상세한 시간 표시, 알림 기능, 메모 작성 등 다양한 기능을 통해 
+            중요한 날짜를 놓치지 않고 준비할 수 있도록 도와드립니다.
+          </p>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px;">
+            <div style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); padding: 20px; border-radius: 10px; border-left: 4px solid var(--primary-color);">
+              <h3 style="color: var(--primary-color); margin-bottom: 10px;">✅ 완전 무료</h3>
+              <p style="margin: 0; color: var(--text-color);">회원가입이나 결제 없이 모든 기능을 무료로 사용할 수 있습니다.</p>
+            </div>
+            <div style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); padding: 20px; border-radius: 10px; border-left: 4px solid var(--primary-color);">
+              <h3 style="color: var(--primary-color); margin-bottom: 10px;">🔒 프라이버시 보호</h3>
+              <p style="margin: 0; color: var(--text-color);">모든 데이터는 브라우저에만 저장되며 서버로 전송되지 않습니다.</p>
+            </div>
+            <div style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); padding: 20px; border-radius: 10px; border-left: 4px solid var(--primary-color);">
+              <h3 style="color: var(--primary-color); margin-bottom: 10px;">📱 모든 기기 지원</h3>
+              <p style="margin: 0; color: var(--text-color);">스마트폰, 태블릿, PC 등 모든 기기에서 최적화된 화면으로 사용 가능합니다.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- 상단 광고 -->
       <div class="ad-container ad-top">
         <ins
@@ -167,7 +210,7 @@
         ></ins>
       </div>
 
-      <main>
+      <main id="tools">
         <!-- D-day 계산 섹션 -->
         <section
           class="calculator-section"
@@ -268,6 +311,73 @@
           </button>
           <div id="widgetResult" class="widget-result"></div>
         </section>
+
+        <!-- FAQ 섹션 -->
+        <section class="faq-section" style="grid-column: span 2;">
+          <h2>❓ 자주 묻는 질문 (FAQ)</h2>
+          
+          <div class="faq-item" style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); padding: 20px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid var(--primary-color);">
+            <h3 style="color: var(--primary-color); margin-bottom: 10px; font-size: 1.2em;">Q. D-day 계산기는 무료인가요?</h3>
+            <p style="margin: 0; color: var(--text-color); line-height: 1.8;">
+              A. 네, 완전 무료입니다. 회원가입이나 설치 없이 바로 사용할 수 있습니다. 
+              모든 기능을 무료로 이용하실 수 있으며, 광고 수익으로 서비스를 운영하고 있습니다.
+            </p>
+          </div>
+
+          <div class="faq-item" style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); padding: 20px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid var(--primary-color);">
+            <h3 style="color: var(--primary-color); margin-bottom: 10px; font-size: 1.2em;">Q. 입력한 날짜와 메모는 어디에 저장되나요?</h3>
+            <p style="margin: 0; color: var(--text-color); line-height: 1.8;">
+              A. 모든 데이터는 사용자의 브라우저 로컬 스토리지에만 저장됩니다. 
+              서버로 전송되지 않으며, 다른 사람이 접근할 수 없습니다. 
+              브라우저 캐시를 삭제하면 저장된 데이터도 함께 삭제됩니다.
+            </p>
+          </div>
+
+          <div class="faq-item" style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); padding: 20px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid var(--primary-color);">
+            <h3 style="color: var(--primary-color); margin-bottom: 10px; font-size: 1.2em;">Q. 모바일에서도 사용할 수 있나요?</h3>
+            <p style="margin: 0; color: var(--text-color); line-height: 1.8;">
+              A. 네, 반응형 디자인으로 구현되어 있어 스마트폰, 태블릿, 데스크톱 등 
+              모든 기기에서 최적화된 화면으로 사용할 수 있습니다. 
+              모바일 브라우저에서도 모든 기능을 정상적으로 사용할 수 있습니다.
+            </p>
+          </div>
+
+          <div class="faq-item" style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); padding: 20px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid var(--primary-color);">
+            <h3 style="color: var(--primary-color); margin-bottom: 10px; font-size: 1.2em;">Q. 위젯 코드를 블로그에 사용해도 되나요?</h3>
+            <p style="margin: 0; color: var(--text-color); line-height: 1.8;">
+              A. 네, 자유롭게 사용하실 수 있습니다. 개인 블로그, 카페, 웹사이트 등 
+              어디에든 위젯 코드를 삽입하여 사용하실 수 있습니다. 
+              상업적 목적의 사용도 가능합니다.
+            </p>
+          </div>
+
+          <div class="faq-item" style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); padding: 20px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid var(--primary-color);">
+            <h3 style="color: var(--primary-color); margin-bottom: 10px; font-size: 1.2em;">Q. 알림 기능이 작동하지 않아요</h3>
+            <p style="margin: 0; color: var(--text-color); line-height: 1.8;">
+              A. 알림 기능을 사용하려면 브라우저에서 알림 권한을 허용해야 합니다. 
+              브라우저 설정에서 알림 권한을 확인해 주세요. 
+              또한 일부 브라우저나 모바일 환경에서는 알림이 제한될 수 있습니다.
+            </p>
+          </div>
+
+          <div class="faq-item" style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); padding: 20px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid var(--primary-color);">
+            <h3 style="color: var(--primary-color); margin-bottom: 10px; font-size: 1.2em;">Q. D-day 계산은 어떻게 하나요?</h3>
+            <p style="margin: 0; color: var(--text-color); line-height: 1.8;">
+              A. 목표 날짜를 선택하고 "계산하기" 버튼을 클릭하면 됩니다. 
+              오늘부터 목표일까지 며칠 남았는지 자동으로 계산되며, 
+              일, 시간, 분, 초 단위로 상세하게 표시됩니다.
+            </p>
+          </div>
+
+          <div style="text-align: center; margin-top: 30px;">
+            <p style="color: var(--text-color); margin-bottom: 15px;">
+              더 많은 질문이 있으신가요?
+            </p>
+            <a href="contact.html" class="btn btn-secondary" style="text-decoration: none; display: inline-block;">
+              문의하기
+            </a>
+          </div>
+        </section>
       </main>
 
       <!-- 하단 광고 -->
@@ -296,6 +406,16 @@
 
       <footer>
         <p>© 2025 AshLight. All rights reserved.</p>
+        <p style="margin-top: 15px;">
+          <a href="index.html" style="color: white; margin: 0 10px; text-decoration: none;">홈</a>
+          <a href="about.html" style="color: white; margin: 0 10px; text-decoration: none;">소개</a>
+          <a href="privacy-policy.html" style="color: white; margin: 0 10px; text-decoration: none;">개인정보 처리방침</a>
+          <a href="terms.html" style="color: white; margin: 0 10px; text-decoration: none;">이용약관</a>
+          <a href="contact.html" style="color: white; margin: 0 10px; text-decoration: none;">문의</a>
+        </p>
+        <p style="margin-top: 10px; font-size: 0.9em; opacity: 0.8;">
+          <a href="sitemap.xml" style="color: white; margin: 0 10px; text-decoration: none;">사이트맵</a>
+        </p>
       </footer>
     </div>
 
