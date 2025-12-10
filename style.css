@@ -474,21 +474,6 @@ section h2 {
     resize: vertical;
 }
 
-.ad-container {
-    margin: 20px auto;
-    text-align: center;
-    padding: 10px;
-}
-
-.ad-top {
-    margin-top: 0;
-}
-
-.ad-bottom {
-    margin-bottom: 20px;
-}
-
-
 footer {
     background: #2c3e50;
     color: white;
