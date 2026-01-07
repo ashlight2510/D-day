@@ -1,6 +1,6 @@
 # 최종 AdSense 정책 준수 감사 보고서
 
-**사이트 URL**: https://ashlight.store/  
+**사이트 URL**: https://funnyfunny.cloud/  
 **최종 감사 일자**: 2025년 1월 27일  
 **감사 범위**: 전체 사이트 구조, 콘텐츠 품질, AdSense 정책 준수
 

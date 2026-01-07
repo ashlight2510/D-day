@@ -13,7 +13,7 @@ CNAME 파일이 제거되었으므로 이제 GitHub Pages 기본 URL로 접근�
 
 ### 도메인 설정이 필요한 경우
 
-만약 `day.ashlight.store` 도메인을 사용하고 싶다면:
+만약 `day.funnyfunny.cloud` 도메인을 사용하고 싶다면:
 
 1. **DNS 설정** (도메인 제공업체에서):
    - CNAME 레코드 추가
@@ -22,10 +22,10 @@ CNAME 파일이 제거되었으므로 이제 GitHub Pages 기본 URL로 접근�
 
 2. **CNAME 파일 다시 생성**:
    ```bash
-   echo "day.ashlight.store" > CNAME
+   echo "day.funnyfunny.cloud" > CNAME
    ```
 
-3. **모든 HTML 파일의 URL을 `day.ashlight.store`로 변경**
+3. **모든 HTML 파일의 URL을 `day.funnyfunny.cloud`로 변경**
 
 ### 현재 상태
 

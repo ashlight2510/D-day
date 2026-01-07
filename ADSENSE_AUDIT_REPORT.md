@@ -1,6 +1,6 @@
 # Google AdSense 정책 준수 감사 보고서
 
-**사이트 URL**: https://ashlight.store/  
+**사이트 URL**: https://funnyfunny.cloud/  
 **감사 일자**: 2025-01-27  
 **감사 범위**: Thin Content, Low-value Content, 필수 페이지, 사이트 구조
 
