@@ -74,7 +74,7 @@
     <link rel="stylesheet" href="style.css" />
 
     <!-- 구조화된 데이터 (JSON-LD) - 구글 검색 결과 향상 -->
-    <script type="application/ld+json">
+    <script id="structured-data" type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "WebApplication",
@@ -104,7 +104,7 @@
       }
     </script>
 
-    <script type="application/ld+json">
+    <script id="faq-ld" type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "FAQPage",
@@ -201,6 +201,7 @@
                 border-radius: 5px;
                 transition: background 0.3s;
               "
+              data-i18n="navHome"
               >홈</a
             >
             <a
@@ -213,6 +214,7 @@
                 border-radius: 5px;
                 transition: background 0.3s;
               "
+              data-i18n="navTools"
               >도구</a
             >
             <div style="position: relative">
@@ -226,6 +228,7 @@
                   border-radius: 5px;
                   transition: background 0.3s;
                 "
+                data-i18n="navContent"
                 >콘텐츠</a
               >
             </div>
@@ -239,6 +242,7 @@
                 border-radius: 5px;
                 transition: background 0.3s;
               "
+              data-i18n="navAbout"
               >소개</a
             >
             <a
@@ -251,26 +255,58 @@
                 border-radius: 5px;
                 transition: background 0.3s;
               "
+              data-i18n="navContact"
               >문의</a
             >
+            <div class="lang-switch" role="tablist" aria-label="Language switcher">
+              <button type="button" data-lang="ko" class="active">한국어</button>
+              <button type="button" data-lang="en">English</button>
+            </div>
           </div>
         </nav>
-        <h1>📅 D-day 계산기</h1>
-        <p class="subtitle">목표일까지 며칠 남았는지 쉽고 빠르게 계산하세요</p>
+        <h1 data-i18n="heroTitle">📅 D-day 계산기</h1>
+        <p class="subtitle" data-i18n="heroSubtitle">
+          목표일까지 며칠 남았는지 쉽고 빠르게 계산하세요
+        </p>
         <div class="theme-selector">
-          <button class="theme-btn" data-theme="purple" title="보라색 테마">
+          <button
+            class="theme-btn"
+            data-theme="purple"
+            title="보라색 테마"
+            data-i18n-title="themePurple"
+          >
             🟣
           </button>
-          <button class="theme-btn" data-theme="blue" title="파란색 테마">
+          <button
+            class="theme-btn"
+            data-theme="blue"
+            title="파란색 테마"
+            data-i18n-title="themeBlue"
+          >
             🔵
           </button>
-          <button class="theme-btn" data-theme="green" title="초록색 테마">
+          <button
+            class="theme-btn"
+            data-theme="green"
+            title="초록색 테마"
+            data-i18n-title="themeGreen"
+          >
             🟢
           </button>
-          <button class="theme-btn" data-theme="pink" title="핑크 테마">
+          <button
+            class="theme-btn"
+            data-theme="pink"
+            title="핑크 테마"
+            data-i18n-title="themePink"
+          >
             🩷
           </button>
-          <button class="theme-btn" data-theme="orange" title="오렌지 테마">
+          <button
+            class="theme-btn"
+            data-theme="orange"
+            title="오렌지 테마"
+            data-i18n-title="themeOrange"
+          >
             🟠
           </button>
         </div>
@@ -290,6 +326,7 @@
               margin-bottom: 20px;
               text-align: center;
             "
+            data-i18n="introTitle"
           >
             D-day 계산기로 목표일을 관리하세요
           </h2>
@@ -301,6 +338,7 @@
               margin-bottom: 20px;
               text-align: center;
             "
+            data-i18n="introDesc1"
           >
             생일, 기념일, 시험일, 프로젝트 마감일 등 모든 중요한 날짜를 쉽고
             빠르게 계산하고 관리할 수 있는 무료 웹 도구입니다. 복잡한 설치나
@@ -314,6 +352,7 @@
               color: var(--text-color);
               margin-bottom: 20px;
             "
+            data-i18n="introDesc2"
           >
             D-day 계산기는 단순히 날짜를 계산하는 것을 넘어, 목표를 향한 여정을
             함께합니다. 실시간 카운트다운, 상세한 시간 표시, 알림 기능, 메모
@@ -336,10 +375,10 @@
                 border-left: 4px solid var(--primary-color);
               "
             >
-              <h3 style="color: var(--primary-color); margin-bottom: 10px">
+              <h3 style="color: var(--primary-color); margin-bottom: 10px" data-i18n="introCard1Title">
                 ✅ 완전 무료
               </h3>
-              <p style="margin: 0; color: var(--text-color)">
+              <p style="margin: 0; color: var(--text-color)" data-i18n="introCard1Desc">
                 회원가입이나 결제 없이 모든 기능을 무료로 사용할 수 있습니다.
               </p>
             </div>
@@ -351,10 +390,10 @@
                 border-left: 4px solid var(--primary-color);
               "
             >
-              <h3 style="color: var(--primary-color); margin-bottom: 10px">
+              <h3 style="color: var(--primary-color); margin-bottom: 10px" data-i18n="introCard2Title">
                 🔒 프라이버시 보호
               </h3>
-              <p style="margin: 0; color: var(--text-color)">
+              <p style="margin: 0; color: var(--text-color)" data-i18n="introCard2Desc">
                 모든 데이터는 브라우저에만 저장되며 서버로 전송되지 않습니다.
               </p>
             </div>
@@ -366,10 +405,10 @@
                 border-left: 4px solid var(--primary-color);
               "
             >
-              <h3 style="color: var(--primary-color); margin-bottom: 10px">
+              <h3 style="color: var(--primary-color); margin-bottom: 10px" data-i18n="introCard3Title">
                 📱 모든 기기 지원
               </h3>
-              <p style="margin: 0; color: var(--text-color)">
+              <p style="margin: 0; color: var(--text-color)" data-i18n="introCard3Desc">
                 스마트폰, 태블릿, PC 등 모든 기기에서 최적화된 화면으로 사용
                 가능합니다.
               </p>
@@ -385,12 +424,12 @@
           itemscope
           itemtype="https://schema.org/SoftwareApplication"
         >
-          <h2>🎯 목표일까지 며칠 남았나요?</h2>
+          <h2 data-i18n="ddayTitle">🎯 목표일까지 며칠 남았나요?</h2>
           <div class="input-group">
-            <label for="targetDate">목표 날짜</label>
+            <label for="targetDate" data-i18n="ddayTargetLabel">목표 날짜</label>
             <input type="date" id="targetDate" required />
           </div>
-          <button class="btn btn-primary" onclick="calculateDday()">
+          <button class="btn btn-primary" onclick="calculateDday()" data-i18n="ddayCalculate">
             계산하기
           </button>
 
@@ -399,21 +438,22 @@
 
         <!-- 역계산 섹션 -->
         <section class="calculator-section">
-          <h2>📆 N일 후는 언제인가요?</h2>
+          <h2 data-i18n="futureTitle">📆 N일 후는 언제인가요?</h2>
           <div class="input-group">
-            <label for="daysInput">며칠 후</label>
+            <label for="daysInput" data-i18n="futureDaysLabel">며칠 후</label>
             <input
               type="number"
               id="daysInput"
               min="1"
               placeholder="일 수를 입력하세요"
+              data-i18n-placeholder="futureDaysPlaceholder"
             />
           </div>
           <div class="input-group">
-            <label for="startDate">시작 날짜</label>
+            <label for="startDate" data-i18n="futureStartLabel">시작 날짜</label>
             <input type="date" id="startDate" />
           </div>
-          <button class="btn btn-primary" onclick="calculateFutureDate()">
+          <button class="btn btn-primary" onclick="calculateFutureDate()" data-i18n="futureCalculate">
             계산하기
           </button>
 
@@ -422,18 +462,18 @@
 
         <!-- 빠른 계산 버튼 -->
         <section class="quick-calc-section">
-          <h2>⚡ 빠른 계산</h2>
+          <h2 data-i18n="quickTitle">⚡ 빠른 계산</h2>
           <div class="quick-buttons">
-            <button class="btn btn-secondary" onclick="quickCalculate(50)">
+            <button class="btn btn-secondary" onclick="quickCalculate(50)" data-i18n="quick50">
               50일 후
             </button>
-            <button class="btn btn-secondary" onclick="quickCalculate(100)">
+            <button class="btn btn-secondary" onclick="quickCalculate(100)" data-i18n="quick100">
               100일 후
             </button>
-            <button class="btn btn-secondary" onclick="quickCalculate(200)">
+            <button class="btn btn-secondary" onclick="quickCalculate(200)" data-i18n="quick200">
               200일 후
             </button>
-            <button class="btn btn-secondary" onclick="quickCalculate(300)">
+            <button class="btn btn-secondary" onclick="quickCalculate(300)" data-i18n="quick300">
               300일 후
             </button>
           </div>
@@ -442,20 +482,21 @@
 
         <!-- 메모/각오 작성 섹션 -->
         <section class="memo-section">
-          <h2>✍️ 메모 / 각오 작성</h2>
+          <h2 data-i18n="memoTitle">✍️ 메모 / 각오 작성</h2>
           <div class="input-group">
-            <label for="memoText">오늘의 각오나 메모를 남겨보세요</label>
+            <label for="memoText" data-i18n="memoLabel">오늘의 각오나 메모를 남겨보세요</label>
             <textarea
               id="memoText"
               rows="4"
               placeholder="예: 시험까지 79일 남았다. 오늘은 2시간 공부했다"
+              data-i18n-placeholder="memoPlaceholder"
             ></textarea>
           </div>
           <div class="memo-actions">
-            <button class="btn btn-primary" onclick="saveMemo()">
+            <button class="btn btn-primary" onclick="saveMemo()" data-i18n="memoSave">
               저장하기
             </button>
-            <button class="btn btn-secondary" onclick="loadMemos()">
+            <button class="btn btn-secondary" onclick="loadMemos()" data-i18n="memoLoad">
               저장된 메모 보기
             </button>
           </div>
@@ -464,17 +505,22 @@
 
         <!-- 위젯 코드 생성기 -->
         <section class="widget-section">
-          <h2>🔗 블로그용 위젯 코드 생성</h2>
-          <p>블로그나 카페에 D-day 위젯을 붙여보세요!</p>
+          <h2 data-i18n="widgetTitle">🔗 블로그용 위젯 코드 생성</h2>
+          <p data-i18n="widgetDesc">블로그나 카페에 D-day 위젯을 붙여보세요!</p>
           <div class="input-group">
-            <label for="widgetDate">위젯에 표시할 날짜</label>
+            <label for="widgetDate" data-i18n="widgetDateLabel">위젯에 표시할 날짜</label>
             <input type="date" id="widgetDate" />
           </div>
           <div class="input-group">
-            <label for="widgetTitle">위젯 제목</label>
-            <input type="text" id="widgetTitle" placeholder="예: 시험일까지" />
+            <label for="widgetTitle" data-i18n="widgetTitleLabel">위젯 제목</label>
+            <input
+              type="text"
+              id="widgetTitle"
+              placeholder="예: 시험일까지"
+              data-i18n-placeholder="widgetTitlePlaceholder"
+            />
           </div>
-          <button class="btn btn-primary" onclick="generateWidget()">
+          <button class="btn btn-primary" onclick="generateWidget()" data-i18n="widgetGenerate">
             위젯 코드 생성
           </button>
           <div id="widgetResult" class="widget-result"></div>
@@ -482,7 +528,7 @@
 
         <!-- FAQ 섹션 -->
         <section class="faq-section" style="grid-column: span 2">
-          <h2>❓ 자주 묻는 질문 (FAQ)</h2>
+          <h2 data-i18n="faqTitle">❓ 자주 묻는 질문 (FAQ)</h2>
 
           <div
             class="faq-item"
@@ -500,10 +546,11 @@
                 margin-bottom: 10px;
                 font-size: 1.2em;
               "
+              data-i18n="faq1Question"
             >
               Q. D-day 계산기는 무료인가요?
             </h3>
-            <p style="margin: 0; color: var(--text-color); line-height: 1.8">
+            <p style="margin: 0; color: var(--text-color); line-height: 1.8" data-i18n="faq1Answer">
               A. 네, 완전 무료입니다. 회원가입이나 설치 없이 바로 사용할 수
               있습니다. 모든 기능을 무료로 이용하실 수 있습니다.
             </p>
@@ -525,10 +572,11 @@
                 margin-bottom: 10px;
                 font-size: 1.2em;
               "
+              data-i18n="faq2Question"
             >
               Q. 입력한 날짜와 메모는 어디에 저장되나요?
             </h3>
-            <p style="margin: 0; color: var(--text-color); line-height: 1.8">
+            <p style="margin: 0; color: var(--text-color); line-height: 1.8" data-i18n="faq2Answer">
               A. 모든 데이터는 사용자의 브라우저 로컬 스토리지에만 저장됩니다.
               서버로 전송되지 않으며, 다른 사람이 접근할 수 없습니다. 브라우저
               캐시를 삭제하면 저장된 데이터도 함께 삭제됩니다.
@@ -551,10 +599,11 @@
                 margin-bottom: 10px;
                 font-size: 1.2em;
               "
+              data-i18n="faq3Question"
             >
               Q. 모바일에서도 사용할 수 있나요?
             </h3>
-            <p style="margin: 0; color: var(--text-color); line-height: 1.8">
+            <p style="margin: 0; color: var(--text-color); line-height: 1.8" data-i18n="faq3Answer">
               A. 네, 반응형 디자인으로 구현되어 있어 스마트폰, 태블릿, 데스크톱
               등 모든 기기에서 최적화된 화면으로 사용할 수 있습니다. 모바일
               브라우저에서도 모든 기능을 정상적으로 사용할 수 있습니다.
@@ -577,10 +626,11 @@
                 margin-bottom: 10px;
                 font-size: 1.2em;
               "
+              data-i18n="faq4Question"
             >
               Q. 위젯 코드를 블로그에 사용해도 되나요?
             </h3>
-            <p style="margin: 0; color: var(--text-color); line-height: 1.8">
+            <p style="margin: 0; color: var(--text-color); line-height: 1.8" data-i18n="faq4Answer">
               A. 네, 자유롭게 사용하실 수 있습니다. 개인 블로그, 카페, 웹사이트
               등 어디에든 위젯 코드를 삽입하여 사용하실 수 있습니다. 상업적
               목적의 사용도 가능합니다.
@@ -603,10 +653,11 @@
                 margin-bottom: 10px;
                 font-size: 1.2em;
               "
+              data-i18n="faq5Question"
             >
               Q. 알림 기능이 작동하지 않아요
             </h3>
-            <p style="margin: 0; color: var(--text-color); line-height: 1.8">
+            <p style="margin: 0; color: var(--text-color); line-height: 1.8" data-i18n="faq5Answer">
               A. 알림 기능을 사용하려면 브라우저에서 알림 권한을 허용해야
               합니다. 브라우저 설정에서 알림 권한을 확인해 주세요. 또한 일부
               브라우저나 모바일 환경에서는 알림이 제한될 수 있습니다.
@@ -629,10 +680,11 @@
                 margin-bottom: 10px;
                 font-size: 1.2em;
               "
+              data-i18n="faq6Question"
             >
               Q. D-day 계산은 어떻게 하나요?
             </h3>
-            <p style="margin: 0; color: var(--text-color); line-height: 1.8">
+            <p style="margin: 0; color: var(--text-color); line-height: 1.8" data-i18n="faq6Answer">
               A. 목표 날짜를 선택하고 "계산하기" 버튼을 클릭하면 됩니다.
               오늘부터 목표일까지 며칠 남았는지 자동으로 계산되며, 일, 시간, 분,
               초 단위로 상세하게 표시됩니다.
@@ -640,13 +692,14 @@
           </div>
 
           <div style="text-align: center; margin-top: 30px">
-            <p style="color: var(--text-color); margin-bottom: 15px">
+            <p style="color: var(--text-color); margin-bottom: 15px" data-i18n="faqMore">
               더 많은 질문이 있으신가요?
             </p>
             <a
               href="contact.html"
               class="btn btn-secondary"
               style="text-decoration: none; display: inline-block"
+              data-i18n="faqContact"
             >
               문의하기
             </a>
@@ -656,35 +709,41 @@
 
       <footer>
         <p>
-          © 2025
+          <span data-i18n="footerCopyright">© 2025</span>
           <a href="about.html" style="color: white; text-decoration: none"
             >AshLight</a
-          >. All rights reserved.
+          >.
+          <span data-i18n="footerRights">All rights reserved.</span>
         </p>
         <p style="margin-top: 15px">
           <a
             href="index.html"
             style="color: white; margin: 0 10px; text-decoration: none"
+            data-i18n="footerHome"
             >홈</a
           >
           <a
             href="about.html"
             style="color: white; margin: 0 10px; text-decoration: none"
+            data-i18n="footerAbout"
             >소개</a
           >
           <a
             href="privacy-policy.html"
             style="color: white; margin: 0 10px; text-decoration: none"
+            data-i18n="footerPrivacy"
             >개인정보 처리방침</a
           >
           <a
             href="terms.html"
             style="color: white; margin: 0 10px; text-decoration: none"
+            data-i18n="footerTerms"
             >이용약관</a
           >
           <a
             href="contact.html"
             style="color: white; margin: 0 10px; text-decoration: none"
+            data-i18n="footerContact"
             >문의</a
           >
         </p>
@@ -692,6 +751,7 @@
           <a
             href="sitemap.xml"
             style="color: white; margin: 0 10px; text-decoration: none"
+            data-i18n="footerSitemap"
             >사이트맵</a
           >
         </p>
